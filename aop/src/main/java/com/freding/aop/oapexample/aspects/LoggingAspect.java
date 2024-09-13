@@ -18,23 +18,23 @@ public class LoggingAspect {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	// execution(*PACKAGE.*.*(..))
-	@Before("execution(* com.freding.aop.oapexample.*.*.*(..))") // @Before annotation is advice
+	@Before("com.freding.aop.oapexample.aspects.CommonPointcutConfig.allPackageConfigBean()") // @Before annotation is advice
 	// execution(* com.freding.aop.oapexample.business.*.*(..)) -> Point Cut
 	public void logMethodCallBeforeExecution(JoinPoint joinpoint) { // this is Join Point
 		logger.info("Before Aspect - {} is called with arguments- {}", joinpoint, joinpoint.getArgs());
 	}
 
-	@After("execution(* com.freding.aop.oapexample.*.*.*(..))")
+	@After("com.freding.aop.oapexample.aspects.CommonPointcutConfig.businessPackageConfig()")
 	public void logMethodCallAfterExecution(JoinPoint joinpoint) {
 		logger.info("After Aspect - {} has executed", joinpoint);
 	}
 
-	@AfterThrowing(pointcut = "execution(* com.freding.aop.oapexample.*.*.*(..))", throwing = "exception")
+	@AfterThrowing(pointcut = "\"com.freding.aop.oapexample.aspects.CommonPointcutConfig.businessAndDataPackageConfig()\"", throwing = "exception")
 	public void logMethodCallAfterException(JoinPoint joinpoint, Exception exception) {
 		logger.info("AfterThrowing Aspect - {} has thrown exception {} ", joinpoint, exception);
 	}
 
-	@AfterReturning(pointcut = "execution(* com.freding.aop.oapexample.*.*.*(..))", returning = "resultValue")
+	@AfterReturning(pointcut = "\"com.freding.aop.oapexample.aspects.CommonPointcutConfig.dataPackageConfig()\"", returning = "resultValue")
 	public void logMethodCallAfterSuccessfulExecution(JoinPoint joinpoint,Object resultValue) {
 		logger.info("AfteReturning Aspect - {} has thrown exception {} ", joinpoint, resultValue);
 	}

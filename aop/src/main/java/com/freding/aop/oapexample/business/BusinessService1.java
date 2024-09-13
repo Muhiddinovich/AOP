@@ -6,6 +6,7 @@ import javax.management.RuntimeErrorException;
 
 import org.springframework.stereotype.Service;
 
+import com.freding.aop.oapexample.annotations.TrackTime;
 import com.freding.aop.oapexample.data.DataService1;
 
 @Service
@@ -16,6 +17,7 @@ public class BusinessService1 {
 		this.dataService1=dataService1;
 	}
 	
+	@TrackTime
 	public int calculateMax() {
 		int[] data = dataService1.retrieveData();
 //		throw new RuntimeException("Something went wrong!");

@@ -2,8 +2,12 @@ package com.freding.aop.oapexample.data;
 
 import org.springframework.stereotype.Repository;
 
+import com.freding.aop.oapexample.annotations.TrackTime;
+
 @Repository
+
 public class DataService2 {
+	@TrackTime
 	public int[] retrieveData() {
 		try {
 			Thread.sleep(30);
